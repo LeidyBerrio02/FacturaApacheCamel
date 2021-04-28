@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.bmid.camel.project.dto.Entrada;
+import com.bmid.camel.project.dto.Salida;
 import com.bmid.camel.project.service.EntradaService;
 import com.bmid.camel.project.service.SalidaService;
 
@@ -20,8 +21,9 @@ public class EntradaProcesor implements Processor{
 	
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		entradaService.crearEntrada(exchange.getIn().getBody(Entrada.class));	
-
+		//entradaService.crearEntrada(exchange.getIn().getBody(Entrada.class));
+		Salida salida = entradaService.crearEntrada(exchange.getIn().getBody(Entrada.class));
+		exchange.getIn().setBody(salida);
 	}
 
 	
